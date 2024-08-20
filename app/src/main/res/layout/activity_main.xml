@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ContainerStyle"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/ethernet_sp"
+            android:entries="@array/ethernet.interface"
+            android:layout_weight="1"
+            android:layout_width="300dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:layout_weight="1"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:text="fill ethernet data"
+            android:textSize="16sp" />
+
+        <EditText style="@style/LANEdittextStyle"
+            android:id="@+id/ip"
+            android:hint="@string/hint_ip_address_such_as_192_168_10_100" />
+
+        <EditText style="@style/LANEdittextStyle"
+            android:id="@+id/mask"
+            android:hint="@string/hint_subnet_mask_such_as_255_255_255_0" />
+
+        <EditText style="@style/LANEdittextStyle"
+            android:id="@+id/gateway"
+            android:hint="@string/hint_gateway_address_such_as_192_168_10_1" />
+
+        <EditText style="@style/LANEdittextStyle"
+            android:id="@+id/dns1"
+            android:hint="@string/hint_dns1_address_such_as_4_4_4_4" />
+
+        <EditText style="@style/LANEdittextStyle"
+            android:id="@+id/dns2"
+            android:hint="@string/hint_dns2_address_such_as_114_114_114_114" />
+
+        <TableRow
+            android:layout_weight="1"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:gravity="center">
+
+            <Button style="@style/ButtonStyle"
+                android:id="@+id/set_btn"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="set static ip"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/dhcp_btn"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="dhcp open"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+    </LinearLayout>
+</LinearLayout>

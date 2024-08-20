@@ -1,0 +1,74 @@
+import groovy.xml.XmlUtil
+
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.advantech.ethernetsample'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.advantech.ethernetsample"
+        minSdk 24
+        //noinspection OldTargetApi
+        targetSdk 32
+        versionCode 1
+        versionName "1.0.0"
+
+    }
+
+    signingConfigs {
+        AIM75 {
+            keyAlias 'AIM75-GMS-userdebug'
+            keyPassword '886227947304'
+            storePassword '886227947304'
+            storeFile file('../AIM75-GMS-userdebug-platform.jks')
+            v2SigningEnabled true
+        }
+    }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            outputFileName = "EthernetManager_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.AIM75
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    compileOnly files('libs/android-30.jar')
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+}
+
+preBuild {
+    doLast {
+        def imlFile = file(project.name + ".iml")
+        println 'Change ' + project.name + '.iml order'
+        try {
+            def parseXml = new XmlParser().parse(imlFile)
+            def jdkNode = parseXml.component[1].orderEntry.find { it.'@type' == 'jdk' }
+            parseXml.component[1].remove(jdkNode)
+            def sdkString = "Android API " + android.compileSdkVersion.substring("android-".length()) + " Platform"
+            new Node(parseXml.component[1], 'orderEntry', ['type': 'jdk', 'jdkName': sdkString, 'jdkType': 'Android SDK'])
+            XmlUtil.serialize(parseXml, new FileOutputStream(imlFile))
+        } catch (FileNotFoundException e) {
+            //nop, iml not found.
+        }
+    }
+}

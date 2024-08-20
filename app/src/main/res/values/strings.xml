@@ -1,0 +1,9 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">EthernetSample</string>
+    <string name="ip_address">IP:<xliff:g id="result">%s</xliff:g></string>
+    <string name="hint_ip_address_such_as_192_168_10_100">IP address, such as 192.168.10.100</string>
+    <string name="hint_subnet_mask_such_as_255_255_255_0">Subnet mask, such as 255.255.255.0</string>
+    <string name="hint_gateway_address_such_as_192_168_10_1">Gateway address, such as 192.168.10.1</string>
+    <string name="hint_dns1_address_such_as_4_4_4_4">DNS1 address, such as 4.4.4.4</string>
+    <string name="hint_dns2_address_such_as_114_114_114_114">DNS2 address, such as 114.114.114.114</string>
+</resources>
